@@ -14,3 +14,20 @@ This project is using [ExpressJS](https://expressjs.com/), [MongooseJS](https://
 
 - `npm run dev`: To start the server in develop mode
 - `npm run start`: To start the server
+
+## Available APIs
+
+- `POST` `/api/auth/signin`: For signing in
+- `POST` `/api/auth/signup`: For signing up
+- `GET` `/api/movies`: For getting movies list
+- `POST` `/api/movie`: For posting a movie
+- `POST` `/api/movie/upvote`: For upvoting a movie
+- `POST` `/api/movie/downvote`: For downvoting a movie
+
+## Source structure
+
+- [controllers](./app/controllers): Contains controllers handling authentication and movie actions
+- [middlewares](./app/middlewares): Contains handlers verifying the incomming requests
+- [models](./app/models): Contains data schemas
+- [routes](./app/routes): Contains endpoints definitions
+- [server.js](./server.js): Initial point
