@@ -38,7 +38,7 @@ const getListMovies = (req, res) => {
     });
 };
 
-const postMovie = (req, res) => {
+const postMovie = async (req, res) => {
   const token = req.headers["access-token"];
   const decoded = jwt.verify(token, secretKey);
   const { title, description, movieUrlId } = req.body;
@@ -51,13 +51,12 @@ const postMovie = (req, res) => {
     downVotes: [],
   });
 
-  movie.save((err) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  try {
+    await movie.save();
     res.status(200).send({ message: "Movie posted successfully!" });
-  });
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
 };
 
 const upVoteMovie = async (req, res) => {
@@ -81,7 +80,7 @@ const upVoteMovie = async (req, res) => {
 
 const downVoteMovie = async (req, res) => {
   const token = req.headers["access-token"];
-  const decoded = jwt.verify(token, config.secret);
+  const decoded = jwt.verify(token, secretKey);
 
   try {
     await Movie.updateOne(

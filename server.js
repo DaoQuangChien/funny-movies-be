@@ -10,7 +10,7 @@ const corsOptions = {
 };
 const PORT = process.env.PORT || 8080;
 const uri =
-  "mongodb+srv://admin:admin@cluster0.yd2r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin@cluster0.yd2r9.mongodb.net/funnyMovies?retryWrites=true&w=majority";
 
 db.mongoose
   .connect(uri, {

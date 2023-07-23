@@ -8,17 +8,14 @@ const signJwt = (id) =>
   jwt.sign({ id }, secretKey, {
     expiresIn: 86400, // 24 hours
   });
-const signup = (req, res) => {
+const signup = async (req, res) => {
   const user = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
-  user.save((err) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  try {
+    await user.save();
     const token = signJwt(user.id);
 
     res.status(200).send({
@@ -26,7 +23,9 @@ const signup = (req, res) => {
       email: user.email,
       accessToken: token,
     });
-  });
+  } catch (err) {
+    res.status(500).send({ message: err });
+  }
 };
 
 const signin = async (req, res) => {
