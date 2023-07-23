@@ -6,7 +6,10 @@ const app = express();
 const authRoute = require("./app/routes/auth.routes");
 const movieRoute = require("./app/routes/movie.routes");
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: [
+    "http://localhost:3000",
+    "https://assignment-funny-movies-fe-a485b16fdf0e.herokuapp.com",
+  ],
 };
 const PORT = process.env.PORT || 8080;
 const uri =
